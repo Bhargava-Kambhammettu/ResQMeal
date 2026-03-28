@@ -1,253 +1,449 @@
 <!DOCTYPE html>
-
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>FoodBridge | Real-Time Delivery Map</title>
+
+<!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+<!-- Leaflet CSS only in <head> — JS goes at bottom of body -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "on-surface-variant": "#5a5c5c",
-              "secondary-fixed-dim": "#c1d8e4",
-              "primary-fixed": "#b2faa9",
-              "on-secondary-fixed-variant": "#495f69",
-              "secondary-container": "#cfe6f2",
-              "tertiary-fixed": "#fec330",
-              "outline-variant": "#acadad",
-              "on-primary": "#d1ffc8",
-              "secondary-fixed": "#cfe6f2",
-              "error-container": "#f95630",
-              "on-tertiary": "#fff1db",
-              "on-secondary-fixed": "#2d424c",
-              "on-tertiary-fixed-variant": "#634900",
-              "secondary-dim": "#3e535c",
-              "tertiary": "#765600",
-              "surface-dim": "#d3d5d5",
-              "on-primary-container": "#1f6223",
-              "background": "#f6f6f6",
-              "surface-container": "#e7e8e8",
-              "surface": "#f6f6f6",
-              "surface-tint": "#266829",
-              "tertiary-container": "#fec330",
-              "inverse-on-surface": "#9c9d9d",
-              "surface-bright": "#f6f6f6",
-              "tertiary-fixed-dim": "#efb520",
-              "primary-dim": "#185c1e",
-              "surface-container-low": "#f0f1f1",
-              "outline": "#767777",
-              "primary-container": "#b2faa9",
-              "primary-fixed-dim": "#a4eb9c",
-              "tertiary-dim": "#674b00",
-              "surface-container-high": "#e1e3e3",
-              "on-tertiary-container": "#584000",
-              "primary": "#266829",
-              "error-dim": "#b92902",
-              "surface-container-lowest": "#ffffff",
-              "on-surface": "#2d2f2f",
-              "on-error-container": "#520c00",
-              "on-secondary": "#e4f5ff",
-              "error": "#b02500",
-              "on-error": "#ffefec",
-              "secondary": "#495f69",
-              "inverse-primary": "#b2faa9",
-              "on-primary-fixed-variant": "#2a6c2c",
-              "on-background": "#2d2f2f",
-              "on-tertiary-fixed": "#402d00",
-              "on-secondary-container": "#40555f",
-              "surface-container-highest": "#dbdddd",
-              "on-primary-fixed": "#054e12",
-              "inverse-surface": "#0c0f0f",
-              "surface-variant": "#dbdddd"
-            },
-            fontFamily: {
-              "headline": ["Plus Jakarta Sans"],
-              "body": ["Inter"],
-              "label": ["Inter"]
-            },
-            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-          },
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-surface-variant": "#5a5c5c",
+          "secondary-container": "#cfe6f2",
+          "tertiary-fixed": "#fec330",
+          "on-primary": "#d1ffc8",
+          "error-container": "#f95630",
+          "on-tertiary": "#fff1db",
+          "secondary-dim": "#3e535c",
+          "tertiary": "#765600",
+          "on-primary-container": "#1f6223",
+          "background": "#f6f6f6",
+          "surface-container": "#e7e8e8",
+          "surface": "#f6f6f6",
+          "tertiary-container": "#fec330",
+          "surface-bright": "#f6f6f6",
+          "tertiary-fixed-dim": "#efb520",
+          "surface-container-low": "#f0f1f1",
+          "primary-container": "#b2faa9",
+          "surface-container-high": "#e1e3e3",
+          "on-tertiary-container": "#584000",
+          "primary": "#266829",
+          "surface-container-lowest": "#ffffff",
+          "on-surface": "#2d2f2f",
+          "on-error-container": "#520c00",
+          "on-secondary": "#e4f5ff",
+          "error": "#b02500",
+          "secondary": "#495f69",
+          "on-background": "#2d2f2f",
+          "on-secondary-container": "#40555f",
+          "surface-container-highest": "#dbdddd",
+          "inverse-surface": "#0c0f0f",
+          "surface-variant": "#dbdddd"
         },
-      }
-    </script>
+        fontFamily: {
+          "headline": ["Plus Jakarta Sans"],
+          "body": ["Inter"],
+          "label": ["Inter"]
+        },
+        borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+      },
+    },
+  }
+</script>
+
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .map-gradient-overlay {
-            background: linear-gradient(to bottom, rgba(246, 246, 246, 0.8) 0%, rgba(246, 246, 246, 0) 20%, rgba(246, 246, 246, 0) 80%, rgba(246, 246, 246, 0.8) 100%);
-        }
-    </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head>
-<body class="bg-surface font-body text-on-surface selection:bg-primary-container">
-<!-- TopAppBar -->
-<header class="fixed top-0 w-full z-50 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl shadow-[0_12px_32px_rgba(45,47,47,0.06)]">
-<div class="flex justify-between items-center px-6 py-4 w-full max-w-screen-2xl mx-auto">
-<div class="flex items-center gap-4">
-<button class="material-symbols-outlined text-green-800 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 p-2 rounded-full transition-colors active:scale-95 duration-200">menu</button>
-<h1 class="text-2xl font-extrabold text-green-900 dark:text-green-50 tracking-tight font-headline">FoodBridge</h1>
-</div>
-<div class="flex items-center gap-6">
-<nav class="hidden md:flex gap-8">
-<a class="text-green-900 dark:text-green-200 font-bold font-headline transition-colors" href="#">Deliveries</a>
-<a class="text-zinc-500 dark:text-zinc-400 font-medium hover:text-green-700 transition-colors" href="#">Impact</a>
-<a class="text-zinc-500 dark:text-zinc-400 font-medium hover:text-green-700 transition-colors" href="#">Network</a>
-</nav>
-<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border-2 border-white shadow-sm">
-<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="professional headshot of a person with friendly expression in clean modern lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhAAFZi7BJOTyV5iQgnO1uVFyaBpQJFWkJIBUW5bTkbIT_YmOB4f5n-qBAFfU40WMK_vzAS5iDuP2_i3mdah9gtK13oVQvggLlIDL18_iU3eeo34CSCiP14FDGdh1peRdWmWF8kyZBH4un0q__kOC9E8IGjLiJwJiHu1eES93lA00quA2BsesBBRnh1Ij61WEP8n3eri12Wd5kd2WenKFx8pkbDXzFvhZEZ2iAbTNuMk49ujXsL6qOSIyEeUMg-X6qPXFFqOZ-xnRw"/>
-</div>
-</div>
-</div>
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; padding: 0; overflow: hidden; }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+
+  /* ── Map fills the viewport ── */
+  #map {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+  }
+
+  /* ── Gradient vignette over map ── */
+  .map-vignette {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(246,246,246,0.72) 0%,
+      rgba(246,246,246,0)    14%,
+      rgba(246,246,246,0)    84%,
+      rgba(246,246,246,0.72) 100%
+    );
+  }
+
+  /* ── All UI panels sit above map ── */
+  header, main, nav, .fab { position: relative; z-index: 10; }
+
+  /* ── Marker pill base ── */
+  .fb-marker {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 9999px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.20);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    white-space: nowrap; cursor: pointer; position: relative;
+  }
+  .fb-marker .ms {
+    font-family: 'Material Symbols Outlined';
+    font-size: 16px; line-height: 1;
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+  }
+  .fb-dot { width: 8px; height: 8px; border-radius: 9999px; margin: 2px auto 0; }
+
+  /* Urgent */
+  .fb-urgent { background: #f95630; color: #520c00; }
+  .fb-urgent-dot { background: #b02500; }
+  @keyframes pulse-ring {
+    0%   { transform: scale(1);   opacity: 0.9; }
+    100% { transform: scale(2.4); opacity: 0; }
+  }
+  .fb-urgent::before {
+    content: ''; position: absolute; inset: 0;
+    border-radius: 9999px; background: #f95630;
+    animation: pulse-ring 1.4s ease-out infinite; z-index: -1;
+  }
+
+  /* Safe */
+  .fb-safe { background: #b2faa9; color: #1f6223; }
+  .fb-safe-dot { background: #266829; }
+
+  /* Volunteer */
+  .fb-volunteer {
+    background: #cfe6f2; color: #2d424c;
+    padding: 8px 10px; border: 2px solid white;
+    animation: bob 2.5s ease-in-out infinite;
+  }
+  @keyframes bob {
+    0%,100% { transform: translateY(0); }
+    50%     { transform: translateY(-5px); }
+  }
+
+  /* NGO */
+  .fb-ngo {
+    background: #fec330; color: #402d00;
+    padding: 8px 10px; border: 2px solid white;
+  }
+
+  /* Leaflet DivIcon — remove default white box */
+  .fb-icon { background: none !important; border: none !important; }
+
+  /* Marker label under icon */
+  .fb-label {
+    font-size: 9px; font-weight: 700; color: #495f69;
+    text-transform: uppercase; letter-spacing: .06em;
+    margin: 2px 0 0;
+    background: rgba(255,255,255,.88);
+    padding: 1px 6px; border-radius: 9999px;
+    white-space: nowrap;
+  }
+
+  /* Popup styling */
+  .leaflet-popup-content-wrapper {
+    border-radius: 16px !important;
+    box-shadow: 0 12px 32px rgba(45,47,47,0.16) !important;
+    padding: 0 !important; overflow: hidden;
+  }
+  .leaflet-popup-content { margin: 0 !important; }
+  .leaflet-popup-tip-container { display: none; }
+  .fb-popup { padding: 16px 18px; min-width: 220px; font-family: 'Inter', sans-serif; }
+  .fb-popup .plabel {
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px;
+  }
+  .fb-popup h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px; font-weight: 700; color: #2d2f2f; margin: 0 0 4px;
+  }
+  .fb-popup p { font-size: 12px; color: #5a5c5c; margin: 0; }
+</style>
+</head>
+
+<body class="bg-surface font-body text-on-surface">
+
+<!-- ── Map (z-index 0) ── -->
+<div id="map"></div>
+<!-- ── Gradient vignette (z-index 1) ── -->
+<div class="map-vignette"></div>
+
+<!-- ── TopAppBar (z-index 10) ── -->
+<header class="fixed top-0 w-full bg-white/60 backdrop-blur-xl shadow-[0_12px_32px_rgba(45,47,47,0.06)]" style="z-index:50;">
+  <div class="flex justify-between items-center px-6 py-4 w-full max-w-screen-2xl mx-auto">
+    <div class="flex items-center gap-4">
+      <button class="material-symbols-outlined text-green-800 hover:bg-green-50 p-2 rounded-full transition-colors">menu</button>
+      <h1 class="text-2xl font-extrabold text-green-900 tracking-tight font-headline">FoodBridge</h1>
+    </div>
+    <div class="flex items-center gap-6">
+      <nav class="hidden md:flex gap-8">
+        <a class="text-green-900 font-bold font-headline" href="#">Deliveries</a>
+        <a class="text-zinc-500 font-medium hover:text-green-700 transition-colors" href="#">Impact</a>
+        <a class="text-zinc-500 font-medium hover:text-green-700 transition-colors" href="#">Network</a>
+      </nav>
+      <div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border-2 border-white shadow-sm">
+        <img alt="User profile avatar" class="w-full h-full object-cover"
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhAAFZi7BJOTyV5iQgnO1uVFyaBpQJFWkJIBUW5bTkbIT_YmOB4f5n-qBAFfU40WMK_vzAS5iDuP2_i3mdah9gtK13oVQvggLlIDL18_iU3eeo34CSCiP14FDGdh1peRdWmWF8kyZBH4un0q__kOC9E8IGjLiJwJiHu1eES93lA00quA2BsesBBRnh1Ij61WEP8n3eri12Wd5kd2WenKFx8pkbDXzFvhZEZ2iAbTNuMk49ujXsL6qOSIyEeUMg-X6qPXFFqOZ-xnRw"/>
+      </div>
+    </div>
+  </div>
 </header>
-<main class="pt-20 pb-24 md:pb-0 min-h-screen relative flex flex-col">
-<!-- Interactive Map Canvas -->
-<div class="flex-grow w-full relative overflow-hidden bg-surface-container-low">
-<!-- Simulated Map Image -->
-<div class="absolute inset-0 z-0">
-<img alt="Detailed city map of London" class="w-full h-full object-cover opacity-60 grayscale-[20%]" data-alt="high quality aerial perspective of a modern city grid with streets and buildings in a clean minimalist architectural style" data-location="London" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByZ48XFnuIFdrM8JJgD6dy3xSY3vja9c4llP_TjHCezxhafkTNNDfa90iZv7CnvsfpAMw_5SRrD-_AbvSwa3Lfx01z6UlQY4Zgp8Ch54Ige_961iHaTAvRMMUE27HkCA72VmOjQncUm0sXZiphJKY_rJ3VlB29syP13XJQCkSSqsq7p1gRRQdDeP2RTIrxQ8uLJlIFKNJPrmRySQWg-xj6q3fnXZ3hd2cWnoxu-RhtJu0uRXIf2jQ3W81gV67UQIiK6_Y0a0PKG_Se"/>
-<div class="absolute inset-0 map-gradient-overlay pointer-events-none"></div>
+
+<!-- ── Floating Active Delivery Tray ── -->
+<div class="fixed top-24 right-6 md:right-10 w-80 max-w-[calc(100vw-3rem)]" style="z-index:40;">
+  <div class="bg-surface-container-lowest/90 backdrop-blur-xl p-5 rounded-[1.5rem] shadow-2xl">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="font-headline font-bold text-base tracking-tight">Active Deliveries</h2>
+      <span class="bg-primary-container text-on-primary-container text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">3 In Progress</span>
+    </div>
+    <div class="space-y-3">
+      <div class="bg-surface-container-low p-3 rounded-xl hover:translate-x-1 transition-transform cursor-pointer"
+           onclick="focusMarker('volunteer')">
+        <div class="flex justify-between items-start mb-2">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+            <span class="text-xs font-bold text-on-surface">Sarah is picking up</span>
+          </div>
+          <span class="text-[10px] font-semibold text-on-surface-variant">4 min away</span>
+        </div>
+        <p class="text-xs font-medium text-on-surface-variant">Green Bistro → St. Jude Shelter</p>
+      </div>
+      <div class="bg-surface-container-low p-3 rounded-xl hover:translate-x-1 transition-transform cursor-pointer"
+           onclick="focusMarker('urgent')">
+        <div class="flex justify-between items-start mb-2">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-tertiary text-[18px]">history_toggle_off</span>
+            <span class="text-xs font-bold text-on-surface">Waiting for Volunteer</span>
+          </div>
+          <span class="text-[10px] font-semibold text-error">Critical</span>
+        </div>
+        <p class="text-xs font-medium text-on-surface-variant">Burger Central (12 Meals)</p>
+      </div>
+    </div>
+    <button class="w-full mt-4 py-3 bg-primary text-on-primary rounded-xl font-headline font-bold text-sm tracking-wide shadow-lg active:scale-95 transition-all">
+      Volunteer Now
+    </button>
+  </div>
 </div>
-<!-- UI Overlay: Markers -->
-<div class="absolute inset-0 z-10 p-6 md:p-12">
-<!-- Restaurant Marker: Critical (Red) -->
-<button class="absolute top-[35%] left-[25%] group active:scale-95 transition-transform">
-<div class="relative flex flex-col items-center">
-<div class="bg-error-container text-on-error-container px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 mb-1 animate-pulse">
-<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">restaurant</span>
-<span class="text-xs font-bold uppercase tracking-wider">Urgent</span>
+
+<!-- ── Floating Legend (Desktop) ── -->
+<div class="fixed bottom-10 left-10 hidden md:block" style="z-index:40;">
+  <div class="bg-surface-container-lowest/80 backdrop-blur-md p-6 rounded-[2rem] shadow-[0_12px_32px_rgba(45,47,47,0.06)] w-72">
+    <h4 class="font-headline font-bold text-sm mb-4">Map Legend</h4>
+    <ul class="space-y-4">
+      <li class="flex items-center gap-3">
+        <span class="w-3 h-3 rounded-full bg-error"></span>
+        <span class="text-sm font-medium">Critical (&lt; 1hr left)</span>
+      </li>
+      <li class="flex items-center gap-3">
+        <span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim"></span>
+        <span class="text-sm font-medium">Moderate (1–3 hrs)</span>
+      </li>
+      <li class="flex items-center gap-3">
+        <span class="w-3 h-3 rounded-full bg-primary"></span>
+        <span class="text-sm font-medium">Stable (3+ hrs)</span>
+      </li>
+      <li class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-secondary text-[20px]">local_shipping</span>
+        <span class="text-sm font-medium">Volunteer in Transit</span>
+      </li>
+      <li class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-tertiary text-[20px]" style="font-variation-settings:'FILL' 1;">volunteer_activism</span>
+        <span class="text-sm font-medium">NGO / Shelter</span>
+      </li>
+    </ul>
+  </div>
 </div>
-<div class="w-1.5 h-1.5 bg-error rounded-full"></div>
-<!-- Hover Detail Card (Absolute Positioned for simplicity) -->
-<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-64 bg-surface-container-lowest p-4 rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-<p class="text-[10px] font-bold text-error uppercase mb-1 tracking-widest">Expiring in 45 mins</p>
-<h3 class="font-headline font-bold text-on-surface">Burger Central</h3>
-<p class="text-sm text-on-surface-variant">12 Fresh Meals Available</p>
-</div>
-</div>
-</button>
-<!-- Restaurant Marker: Safe (Green) -->
-<button class="absolute top-[55%] left-[60%] group active:scale-95 transition-transform">
-<div class="relative flex flex-col items-center">
-<div class="bg-primary-container text-on-primary-container px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 mb-1">
-<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">restaurant</span>
-<span class="text-xs font-bold uppercase tracking-wider">Green Bistro</span>
-</div>
-<div class="w-1.5 h-1.5 bg-primary rounded-full"></div>
-<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-64 bg-surface-container-lowest p-4 rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-<p class="text-[10px] font-bold text-primary uppercase mb-1 tracking-widest">Expiring in 2 hrs</p>
-<h3 class="font-headline font-bold text-on-surface">Green Bistro</h3>
-<p class="text-sm text-on-surface-variant">20 Veg Meals, Ready for Pickup</p>
-</div>
-</div>
-</button>
-<!-- Volunteer Icon (Moving) -->
-<div class="absolute top-[45%] left-[40%] flex flex-col items-center">
-<div class="bg-secondary-container text-on-secondary-container p-2 rounded-full shadow-xl border-2 border-white">
-<span class="material-symbols-outlined text-[20px]">local_shipping</span>
-</div>
-<p class="text-[9px] font-bold text-secondary uppercase mt-1 bg-white/80 px-2 rounded-full">Sarah V.</p>
-</div>
-<!-- NGO Icon -->
-<div class="absolute top-[20%] left-[75%] flex flex-col items-center">
-<div class="bg-tertiary-container text-on-tertiary-container p-2 rounded-full shadow-xl border-2 border-white">
-<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
-</div>
-<p class="text-[9px] font-bold text-tertiary uppercase mt-1 bg-white/80 px-2 rounded-full">St. Jude Shelter</p>
-</div>
-</div>
-<!-- Floating Legend (Desktop) -->
-<div class="absolute bottom-10 left-10 hidden md:block z-20">
-<div class="bg-surface-container-lowest/80 backdrop-blur-md p-6 rounded-[2rem] shadow-[0_12px_32px_rgba(45,47,47,0.06)] w-72">
-<h4 class="font-headline font-bold text-sm mb-4">Map Legend</h4>
-<ul class="space-y-4">
-<li class="flex items-center gap-3">
-<span class="w-3 h-3 rounded-full bg-error"></span>
-<span class="text-sm font-medium">Critical (&lt; 1hr left)</span>
-</li>
-<li class="flex items-center gap-3">
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim"></span>
-<span class="text-sm font-medium">Moderate (1-3hrs)</span>
-</li>
-<li class="flex items-center gap-3">
-<span class="w-3 h-3 rounded-full bg-primary"></span>
-<span class="text-sm font-medium">Stable (3+ hrs)</span>
-</li>
-<li class="flex items-center gap-3">
-<span class="material-symbols-outlined text-secondary text-[20px]">local_shipping</span>
-<span class="text-sm font-medium">Volunteer in Transit</span>
-</li>
-</ul>
-</div>
-</div>
-<!-- Floating Active Delivery Tray (Mobile/Desktop) -->
-<div class="absolute top-24 right-6 md:right-10 z-20 w-80 max-w-[calc(100vw-3rem)]">
-<div class="bg-surface-container-lowest/90 backdrop-blur-xl p-5 rounded-[1.5rem] shadow-2xl">
-<div class="flex justify-between items-center mb-4">
-<h2 class="font-headline font-bold text-base tracking-tight">Active Deliveries</h2>
-<span class="bg-primary-container text-on-primary-container text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">3 In Progress</span>
-</div>
-<!-- Delivery Card -->
-<div class="space-y-3">
-<div class="bg-surface-container-low p-3 rounded-xl hover:translate-x-1 transition-transform cursor-pointer">
-<div class="flex justify-between items-start mb-2">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
-<span class="text-xs font-bold text-on-surface">Sarah is picking up</span>
-</div>
-<span class="text-[10px] font-semibold text-on-surface-variant">4 min away</span>
-</div>
-<p class="text-xs font-medium text-on-surface-variant">Green Bistro → St. Jude Shelter</p>
-</div>
-<div class="bg-surface-container-low p-3 rounded-xl hover:translate-x-1 transition-transform cursor-pointer">
-<div class="flex justify-between items-start mb-2">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-tertiary text-[18px]">history_toggle_off</span>
-<span class="text-xs font-bold text-on-surface">Waiting for Volunteer</span>
-</div>
-<span class="text-[10px] font-semibold text-error">Critical</span>
-</div>
-<p class="text-xs font-medium text-on-surface-variant">Burger Central (12 Meals)</p>
-</div>
-</div>
-<button class="w-full mt-4 py-3 bg-primary text-on-primary rounded-xl font-headline font-bold text-sm tracking-wide shadow-lg active:scale-95 transition-all">
-                        Volunteer Now
-                    </button>
-</div>
-</div>
-</div>
-</main>
-<!-- BottomNavBar (Mobile Only) -->
-<nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-zinc-900 rounded-t-[1.5rem] shadow-[0_-4px_24px_rgba(0,0,0,0.04)] border-t border-zinc-100 dark:border-zinc-800 flex justify-around items-center px-4 pb-6 pt-3">
-<button class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-2 tap-highlight-transparent hover:text-green-700">
-<span class="material-symbols-outlined">grid_view</span>
-<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Dashboard</span>
-</button>
-<button class="flex flex-col items-center justify-center bg-green-100 dark:bg-green-900/40 text-green-900 dark:text-green-100 rounded-[1.25rem] px-5 py-2 tap-highlight-transparent">
-<span class="material-symbols-outlined">local_shipping</span>
-<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Deliveries</span>
-</button>
-<button class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-2 tap-highlight-transparent hover:text-green-700">
-<span class="material-symbols-outlined">analytics</span>
-<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Impact</span>
-</button>
-<button class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-2 tap-highlight-transparent hover:text-green-700">
-<span class="material-symbols-outlined">person</span>
-<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Profile</span>
-</button>
+
+<!-- ── BottomNavBar (Mobile) ── -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white rounded-t-[1.5rem] shadow-[0_-4px_24px_rgba(0,0,0,0.04)] border-t border-zinc-100 flex justify-around items-center px-4 pb-6 pt-3" style="z-index:50;">
+  <button class="flex flex-col items-center text-zinc-400 px-5 py-2 hover:text-green-700">
+    <span class="material-symbols-outlined">grid_view</span>
+    <span class="text-[11px] font-semibold uppercase tracking-wider mt-1">Dashboard</span>
+  </button>
+  <button class="flex flex-col items-center bg-green-100 text-green-900 rounded-[1.25rem] px-5 py-2">
+    <span class="material-symbols-outlined">local_shipping</span>
+    <span class="text-[11px] font-semibold uppercase tracking-wider mt-1">Deliveries</span>
+  </button>
+  <button class="flex flex-col items-center text-zinc-400 px-5 py-2 hover:text-green-700">
+    <span class="material-symbols-outlined">analytics</span>
+    <span class="text-[11px] font-semibold uppercase tracking-wider mt-1">Impact</span>
+  </button>
+  <button class="flex flex-col items-center text-zinc-400 px-5 py-2 hover:text-green-700">
+    <span class="material-symbols-outlined">person</span>
+    <span class="text-[11px] font-semibold uppercase tracking-wider mt-1">Profile</span>
+  </button>
 </nav>
-<!-- Legend Tooltip (Mobile Only) -->
-<button class="md:hidden fixed bottom-28 right-6 z-40 bg-white shadow-xl rounded-full p-4 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined">info</span>
+
+<!-- ── Legend toggle FAB (Mobile) ── -->
+<button class="fab md:hidden fixed bottom-28 right-6 bg-white shadow-xl rounded-full p-4 flex items-center justify-center text-primary" style="z-index:50;">
+  <span class="material-symbols-outlined">info</span>
 </button>
-</body></html>
+
+<!-- ══════════════════════════════════════════
+     Leaflet JS — MUST be before map init script
+══════════════════════════════════════════ -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+  // ── Coordinates (Chennai) ─────────────────────────────────────────────
+  const LOC = {
+    burgerCentral: [13.0827, 80.2707],
+    greenBistro:   [13.0750, 80.2620],
+    sarah:         [13.0788, 80.2665],
+    stJude:        [13.0870, 80.2580],
+  };
+
+  // ── Init map ──────────────────────────────────────────────────────────
+  const map = L.map('map', {
+    center: [13.0800, 80.2660],
+    zoom: 14,
+    zoomControl: false,
+  });
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
+
+  L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+  // ── DivIcon helper ────────────────────────────────────────────────────
+  function mkIcon(html) {
+    return L.divIcon({ html, className: 'fb-icon', iconAnchor: [0, 0], popupAnchor: [10, -10] });
+  }
+
+  // ── Markers ───────────────────────────────────────────────────────────
+
+  // Burger Central — URGENT
+  const mUrgent = L.marker(LOC.burgerCentral, {
+    icon: mkIcon(`
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <div class="fb-marker fb-urgent"><span class="ms">restaurant</span> Urgent</div>
+        <div class="fb-dot fb-urgent-dot"></div>
+      </div>`),
+    zIndexOffset: 300
+  }).addTo(map).bindPopup(`
+    <div class="fb-popup">
+      <p class="plabel" style="color:#b02500;">⚠ Expiring in 45 mins</p>
+      <h3>Burger Central</h3>
+      <p>12 Fresh Meals — needs a volunteer now</p>
+    </div>`);
+
+  // Green Bistro — SAFE
+  const mSafe = L.marker(LOC.greenBistro, {
+    icon: mkIcon(`
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <div class="fb-marker fb-safe"><span class="ms">restaurant</span> Green Bistro</div>
+        <div class="fb-dot fb-safe-dot"></div>
+      </div>`),
+    zIndexOffset: 200
+  }).addTo(map).bindPopup(`
+    <div class="fb-popup">
+      <p class="plabel" style="color:#266829;">✓ Expiring in 2 hrs</p>
+      <h3>Green Bistro</h3>
+      <p>20 Veg Meals — Ready for Pickup</p>
+    </div>`);
+
+  // Sarah — VOLUNTEER
+  const mVolunteer = L.marker(LOC.sarah, {
+    icon: mkIcon(`
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <div class="fb-marker fb-volunteer">
+          <span class="ms" style="font-size:18px;">local_shipping</span>
+        </div>
+        <p class="fb-label">Sarah V.</p>
+      </div>`),
+    zIndexOffset: 400
+  }).addTo(map).bindPopup(`
+    <div class="fb-popup">
+      <p class="plabel" style="color:#495f69;">🚐 In Transit</p>
+      <h3>Sarah V.</h3>
+      <p>Green Bistro → St. Jude Shelter<br>4 minutes away</p>
+    </div>`);
+
+  // St. Jude — NGO
+  const mNGO = L.marker(LOC.stJude, {
+    icon: mkIcon(`
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <div class="fb-marker fb-ngo">
+          <span class="ms" style="font-size:18px;font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 20;">volunteer_activism</span>
+        </div>
+        <p class="fb-label" style="color:#765600;">St. Jude Shelter</p>
+      </div>`),
+    zIndexOffset: 100
+  }).addTo(map).bindPopup(`
+    <div class="fb-popup">
+      <p class="plabel" style="color:#765600;">🏠 NGO Partner</p>
+      <h3>St. Jude Shelter</h3>
+      <p>Expecting delivery from Green Bistro</p>
+    </div>`);
+
+  // ── Dashed route line ─────────────────────────────────────────────────
+  L.polyline([LOC.greenBistro, LOC.sarah, LOC.stJude], {
+    color: '#266829', weight: 3, opacity: 0.7, dashArray: '8 5'
+  }).addTo(map);
+
+  // ── Urgency radius circle ─────────────────────────────────────────────
+  L.circle(LOC.burgerCentral, {
+    radius: 300, color: '#b02500',
+    fillColor: '#f95630', fillOpacity: 0.08,
+    weight: 1, dashArray: '4 4'
+  }).addTo(map);
+
+  // ── Animate Sarah toward St. Jude ─────────────────────────────────────
+  let step = 0;
+  const STEPS = 600;
+  const [sLat, sLng] = LOC.sarah;
+  const [eLat, eLng] = LOC.stJude;
+
+  setInterval(() => {
+    step = (step + 1) % STEPS;
+    const t = step / STEPS;
+    mVolunteer.setLatLng([sLat + (eLat - sLat) * t, sLng + (eLng - sLng) * t]);
+  }, 100);
+
+  // ── Click-to-focus from delivery cards ───────────────────────────────
+  const registry = {
+    urgent:    { marker: mUrgent,    latlng: LOC.burgerCentral },
+    safe:      { marker: mSafe,      latlng: LOC.greenBistro   },
+    volunteer: { marker: mVolunteer, latlng: LOC.sarah         },
+    ngo:       { marker: mNGO,       latlng: LOC.stJude        },
+  };
+
+  window.focusMarker = function (id) {
+    const e = registry[id];
+    if (!e) return;
+    map.flyTo(e.latlng, 15, { animate: true, duration: 0.8 });
+    setTimeout(() => e.marker.openPopup(), 900);
+  };
+
+})();
+</script>
+</body>
+</html>
