@@ -1,24 +1,226 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Login</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FoodBridge | Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            colors: {
+                "primary": "#266829",
+                "primary-dim": "#185c1e",
+                "primary-container": "#b2faa9",
+                "on-primary-container": "#054e12",
+                "surface": "#f6f6f6",
+                "surface-container-lowest": "#ffffff",
+                "on-surface": "#2d2f2f",
+                "on-surface-variant": "#5a5c5c",
+                "outline": "#767777"
+            },
+            fontFamily: {
+                "headline": ["Plus Jakarta Sans"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            },
+            borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1.5rem", "full": "9999px" },
+        },
+    },
+}
+</script>
+<style>
+.material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24 }
+.bg-login-hero { background-image: linear-gradient(to bottom, rgba(38, 104, 41, 0.4), rgba(246, 246, 246, 1)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuAFR5QQfT_qsVq47xLnCHPnbBLzap4lhkrujDt-PRh0sNQtOiyRiZ7gLIsAXzKdTo6dBix8TUkZhTGSZRPbckcF8LtzW0Wy7sRRjUyapMWDtCUbuB5kfLRMZbDoeEsPM424tx6YKrY4U4qqkR8XOZXzPu4bu42amvkDRrM2QhQogAvYLL4He54XJ27UvPy6Il_Y4gdbiQcStk2Sp8hrmyU3eaJ05Z74HXlvmbmycLXM9mkJ3npgaw8AqLbCevD9XVtCoiO0aM6Hh3BY); background-size: cover; background-position: center; }
+body { min-height: max(884px, 100dvh); }
+</style>
 </head>
+<body class="bg-surface font-body text-on-surface antialiased min-h-screen flex flex-col items-center justify-center p-4">
 
-<body style="text-align:center; margin-top:100px;">
+<main class="w-full max-w-[1200px] grid grid-cols-1 md:grid-cols-2 bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_12px_32px_rgba(45,47,47,0.06)] min-h-[700px]">
 
-  <h1>Login to ResQMeal</h1>
+<!-- Left Column -->
+<div class="hidden md:flex flex-col justify-between p-12 bg-login-hero relative">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-12">
+<span class="material-symbols-outlined text-on-primary bg-primary p-2 rounded-xl" data-icon="eco">eco</span>
+<span class="text-2xl font-extrabold tracking-tight font-headline text-on-primary">FoodBridge</span>
+</div>
+<h2 class="text-4xl font-extrabold font-headline leading-tight text-white mb-6">
+Reducing Waste,<br/>Feeding Hope.
+</h2>
+<p class="text-on-primary/90 text-lg max-w-sm leading-relaxed">
+Connecting surplus food from restaurants directly to those who need it most through our verified partner network.
+</p>
+</div>
+</div>
 
-  <!-- BUTTON -->
-  <button onclick="googleLogin()">
-    Continue with Google
-  </button>
+<!-- Right Column -->
+<div class="p-8 md:p-16 flex flex-col justify-center">
+<div class="mb-10">
+<h1 class="text-3xl font-extrabold font-headline text-on-surface mb-2 tracking-tight">Welcome Back to FoodBridge</h1>
+<p class="text-on-surface-variant text-sm">Select your role and enter your credentials to continue.</p>
+</div>
 
-  <!-- Firebase scripts (VERY IMPORTANT) -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<!-- Role Selection -->
+<div class="mb-8">
+<label class="text-xs font-bold uppercase tracking-wider text-outline mb-4 block">Select Your Role</label>
+<div class="grid grid-cols-3 gap-3">
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-primary bg-primary-container text-on-primary-container transition-all active:scale-95">
+<span class="material-symbols-outlined mb-2 text-2xl" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+<span class="text-[11px] font-bold uppercase tracking-wide">Restaurant</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-surface-container-high bg-surface text-on-surface-variant hover:border-outline-variant transition-all active:scale-95">
+<span class="material-symbols-outlined mb-2 text-2xl">corporate_fare</span>
+<span class="text-[11px] font-bold uppercase tracking-wide">NGO</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-surface-container-high bg-surface text-on-surface-variant hover:border-outline-variant transition-all active:scale-95">
+<span class="material-symbols-outlined mb-2 text-2xl">directions_bike</span>
+<span class="text-[11px] font-bold uppercase tracking-wide">Volunteer</span>
+</button>
+</div>
+</div>
 
-  <!-- Your JS file -->
-  <script src="js/auth.js"></script>
+<!-- Form -->
+<form class="space-y-6">
+<div>
+<label class="text-xs font-bold uppercase tracking-wider text-outline mb-2 block" for="email">Email Address</label>
+<div class="relative group">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline group-focus-within:text-primary">mail</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-none rounded-xl text-on-surface focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all shadow-sm" id="email" placeholder="chef@greenbistro.com" type="email"/>
+</div>
+</div>
+<div>
+<label class="text-xs font-bold uppercase tracking-wider text-outline mb-2 block" for="password">Password</label>
+<div class="relative group">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline group-focus-within:text-primary">lock</span>
+<input class="w-full pl-12 pr-12 py-4 bg-surface-container-low border-none rounded-xl text-on-surface focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all shadow-sm" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline hover:text-on-surface transition-colors" type="button">visibility</button>
+</div>
+</div>
+
+<div class="flex items-center justify-between">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+<span class="text-sm font-medium text-on-surface-variant group-hover:text-on-surface transition-colors">Remember Me</span>
+</label>
+<a class="text-sm font-bold text-primary hover:text-primary-dim transition-colors" href="#">Forgot Password?</a>
+</div>
+
+<button class="w-full py-4 bg-gradient-to-r from-primary to-primary-dim text-on-primary font-bold text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all active:scale-[0.98] mt-4 flex items-center justify-center gap-2" type="submit">
+Login
+<span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+</form>
+
+<div class="relative my-8">
+<div class="absolute inset-0 flex items-center"><div class="w-full border-t border-surface-container-highest"></div></div>
+<div class="relative flex justify-center text-xs uppercase tracking-widest"><span class="bg-surface-container-lowest px-4 text-outline font-bold">Or continue with</span></div>
+</div>
+
+<!-- Google Button -->
+<button id="googleBtn" class="w-full py-4 bg-surface border border-outline-variant/20 rounded-xl flex items-center justify-center gap-3 hover:bg-surface-container-low transition-all active:scale-[0.98]">
+<img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCig8HLM6BMm4gWbw3VTc8mJKRjIb3js1gBGUz35VsqjlYeT-MMlbKdwt8B9milA1zjazr8t2BOsAsKoDyZiHIG0izicZrWJF8edTwY3IHwqz5NWpYxasWwMGlsvGgo6rcTDiL36_3aBWkZ2pT0fpq3-hUxhduzZj61VvFNWxsvftoDZTgO84kabl1i36VQUmrsVDqLXPLuRNPAUW58rs5st3wNWwThwmwGSRSfv49xTA3zf5YGU-Jq-v6MOBW6EH85AWO4JVFetyqs"/>
+<span class="font-bold text-on-surface-variant">Sign in with Google</span>
+</button>
+
+<p class="text-center mt-10 text-on-surface-variant">
+New to FoodBridge? 
+<a class="text-primary font-bold hover:underline" href="#">Create an Account</a>
+</p>
+</div>
+</main>
+
+<footer class="mt-8 text-outline text-xs font-medium uppercase tracking-[0.1em] flex gap-6">
+<span>Privacy Policy</span>
+<span>Terms of Service</span>
+<span>© 2024 FoodBridge Inc.</span>
+</footer>
+
+<!-- Firebase Modular v12 -->
+<script type="module">
+ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+
+// 1. YOUR CONFIG (Keep this as is)
+const firebaseConfig = {
+  apiKey: "AIzaSyA9CePuRpXlaailVtShlffFCG5FsuGyG_s",
+  authDomain: "resqmeal-d30f6.firebaseapp.com",
+  projectId: "resqmeal-d30f6",
+  storageBucket: "resqmeal-d30f6.firebasestorage.app",
+  messagingSenderId: "1083691145466",
+  appId: "1:1083691146:web:c6aab87c3c0c1111f89143"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+// 2. ROLE SELECTION LOGIC
+let selectedRole = "restaurant"; // Default starting role
+
+// We select all buttons that have the "flex-col" class inside the role area
+const roleButtons = document.querySelectorAll('.grid.grid-cols-3 button');
+
+roleButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        // Prevent form from submitting when clicking a role
+        e.preventDefault(); 
+
+        // Step A: Make all buttons look "inactive" (Gray)
+        roleButtons.forEach(b => {
+            b.classList.replace('bg-primary-container', 'bg-surface');
+            b.classList.replace('border-primary', 'border-surface-container-high');
+            b.classList.replace('text-on-primary-container', 'text-on-surface-variant');
+        });
+
+        // Step B: Make the CLICKED button look "active" (Green)
+        btn.classList.replace('bg-surface', 'bg-primary-container');
+        btn.classList.replace('border-surface-container-high', 'border-primary');
+        btn.classList.replace('text-on-surface-variant', 'text-on-primary-container');
+
+        // Step C: Save the role name
+        selectedRole = btn.querySelector('span:last-child').innerText.toLowerCase();
+        console.log("Selected Role is now:", selectedRole);
+    });
+});
+
+// 3. GOOGLE LOGIN LOGIC
+const googleBtn = document.getElementById('googleBtn');
+googleBtn.addEventListener('click', async () => {
+    try {
+        const result = await signInWithPopup(auth, provider);
+        // This saves the role so your next page knows if it's an NGO or Restaurant
+        localStorage.setItem('userRole', selectedRole);
+        
+        alert("Success! Logged in as " + selectedRole);
+        window.location.href = "dashboard.html"; 
+    } catch (error) {
+        alert("Google Login Error: " + error.message);
+        console.error(error);
+    }
+});
+
+// 4. EMAIL/PASSWORD LOGIN LOGIC
+const loginForm = document.querySelector('form');
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+        localStorage.setItem('userRole', selectedRole);
+        window.location.href = "dashboard.html";
+    } catch (error) {
+        alert("Login failed: " + error.message);
+    }
+});
+</script>
 
 </body>
 </html>
