@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#5a5c5c",
+              "secondary-fixed-dim": "#c1d8e4",
+              "primary-fixed": "#b2faa9",
+              "on-secondary-fixed-variant": "#495f69",
+              "secondary-container": "#cfe6f2",
+              "tertiary-fixed": "#fec330",
+              "outline-variant": "#acadad",
+              "on-primary": "#d1ffc8",
+              "secondary-fixed": "#cfe6f2",
+              "error-container": "#f95630",
+              "on-tertiary": "#fff1db",
+              "on-secondary-fixed": "#2d424c",
+              "on-tertiary-fixed-variant": "#634900",
+              "secondary-dim": "#3e535c",
+              "tertiary": "#765600",
+              "surface-dim": "#d3d5d5",
+              "on-primary-container": "#1f6223",
+              "background": "#f6f6f6",
+              "surface-container": "#e7e8e8",
+              "surface": "#f6f6f6",
+              "surface-tint": "#266829",
+              "tertiary-container": "#fec330",
+              "inverse-on-surface": "#9c9d9d",
+              "surface-bright": "#f6f6f6",
+              "tertiary-fixed-dim": "#efb520",
+              "primary-dim": "#185c1e",
+              "surface-container-low": "#f0f1f1",
+              "outline": "#767777",
+              "primary-container": "#b2faa9",
+              "primary-fixed-dim": "#a4eb9c",
+              "tertiary-dim": "#674b00",
+              "surface-container-high": "#e1e3e3",
+              "on-tertiary-container": "#584000",
+              "primary": "#266829",
+              "error-dim": "#b92902",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#2d2f2f",
+              "on-error-container": "#520c00",
+              "on-secondary": "#e4f5ff",
+              "error": "#b02500",
+              "on-error": "#ffefec",
+              "secondary": "#495f69",
+              "inverse-primary": "#b2faa9",
+              "on-primary-fixed-variant": "#2a6c2c",
+              "on-background": "#2d2f2f",
+              "on-tertiary-fixed": "#402d00",
+              "on-secondary-container": "#40555f",
+              "surface-container-highest": "#dbdddd",
+              "on-primary-fixed": "#054e12",
+              "inverse-surface": "#0c0f0f",
+              "surface-variant": "#dbdddd"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .hide-scrollbar::-webkit-scrollbar { display: none; }
+      .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased selection:bg-primary-container">
+<!-- TopAppBar -->
+<header class="bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl fixed top-0 w-full z-50 shadow-[0_12px_32px_rgba(45,47,47,0.06)]">
+<div class="flex justify-between items-center px-6 py-4 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-green-800 dark:text-green-400 p-2 hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors active:scale-95 duration-200 rounded-full" data-icon="menu">menu</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-extrabold text-2xl tracking-tight text-green-900 dark:text-green-50">FoodBridge</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8">
+<a class="text-zinc-500 font-medium hover:text-green-800 transition-colors" href="#">Dashboard</a>
+<a class="text-zinc-500 font-medium hover:text-green-800 transition-colors" href="#">Deliveries</a>
+<a class="text-green-900 dark:text-green-200 font-bold" href="#">Impact</a>
+<a class="text-zinc-500 font-medium hover:text-green-800 transition-colors" href="#">Profile</a>
+</nav>
+<div class="h-10 w-10 rounded-full overflow-hidden bg-surface-container-highest ring-2 ring-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="professional portrait of a young male restaurant manager in a white kitchen setting with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWfrSnA5czvXMwUUi3ruJ9yeveY-RO37maOadDPbXhjldLmElQqUGQgIuaA7XsJEf1ncQ5HSLPCHRlGzLjIcLGGmAZ_NBcLvUjkjASx1kG1dnNiINr-yTRdjj1jlaZ40b-9NkawasnFiMSLZLp0q68Mr8XJvcSmt2LxgzgZAwgqCUm3m2shHjUGdLGLwqZN1-Jw9-SUiOTwPB5F-t9opjar7wSYcgz9ueyNm48lMzLO05s8_0YkVoItAaREDiuTpWBXbuGW4FpHzDv"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-28 pb-32 px-6 max-w-screen-2xl mx-auto min-h-screen">
+<!-- Hero Metrics: Asymmetric Bento Grid -->
+<section class="mb-16">
+<div class="mb-8">
+<span class="font-label text-xs uppercase tracking-[0.15em] text-primary font-bold mb-2 block">Performance Overview</span>
+<h2 class="font-headline text-4xl font-extrabold tracking-tight text-on-surface">Your Impact Ledger</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Large Primary Metric -->
+<div class="md:col-span-7 bg-surface-container-lowest p-8 rounded-[1.5rem] shadow-[0_12px_32px_rgba(45,47,47,0.04)] relative overflow-hidden group">
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-12">
+<span class="material-symbols-outlined text-primary bg-primary-container p-3 rounded-2xl" data-icon="restaurant">restaurant</span>
+<span class="font-label text-sm font-semibold text-on-surface-variant">Active Contribution</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline text-7xl font-extrabold text-on-surface tracking-tighter">12,482</span>
+<span class="font-headline text-2xl font-bold text-primary">Meals Saved</span>
+</div>
+<p class="mt-4 text-on-surface-variant max-w-sm leading-relaxed">Through your consistent efforts, enough food has been diverted to support 45 families for an entire month.</p>
+</div>
+<div class="absolute -right-8 -bottom-8 opacity-10 group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined text-[200px]" data-icon="eco" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+</div>
+<!-- Secondary Metrics Column -->
+<div class="md:col-span-5 flex flex-col gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-[1.5rem] flex items-center justify-between shadow-[0_12px_32px_rgba(45,47,47,0.04)]">
+<div class="flex flex-col">
+<span class="font-label text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Environmental Impact</span>
+<span class="font-headline text-3xl font-bold text-on-surface">3,240 <span class="text-sm font-medium text-on-surface-variant">kg</span></span>
+<span class="text-sm text-on-surface-variant mt-1">CO2 Emissions Reduced</span>
+</div>
+<div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="cloud_done">cloud_done</span>
+</div>
+</div>
+<div class="bg-primary bg-gradient-to-br from-primary to-primary-dim p-6 rounded-[1.5rem] flex items-center justify-between shadow-xl">
+<div class="flex flex-col">
+<span class="font-label text-xs font-bold text-primary-container uppercase tracking-wider mb-1 text-white/80">Logistics Success</span>
+<span class="font-headline text-3xl font-bold text-white">892</span>
+<span class="text-sm text-white/70 mt-1">Deliveries Completed</span>
+</div>
+<div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="local_shipping" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Visual Analytics & Badges -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+<!-- Impact Visualization Chart -->
+<div class="lg:col-span-2 bg-surface-container-lowest p-8 rounded-[1.5rem] shadow-[0_12px_32px_rgba(45,47,47,0.04)]">
+<div class="flex items-center justify-between mb-10">
+<h3 class="font-headline text-xl font-bold">Impact Trajectory</h3>
+<div class="flex bg-surface-container-low p-1 rounded-xl">
+<button class="px-4 py-1.5 text-xs font-bold bg-white rounded-lg shadow-sm">Monthly</button>
+<button class="px-4 py-1.5 text-xs font-bold text-on-surface-variant">Weekly</button>
+</div>
+</div>
+<!-- Mock Bar Chart -->
+<div class="flex items-end justify-between h-48 gap-4 px-2">
+<div class="flex flex-col items-center flex-1 gap-3">
+<div class="w-full bg-surface-container rounded-t-lg h-[40%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Jan</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-3">
+<div class="w-full bg-surface-container rounded-t-lg h-[60%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Feb</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-3">
+<div class="w-full bg-primary-fixed-dim rounded-t-lg h-[55%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Mar</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-3">
+<div class="w-full bg-primary rounded-t-lg h-[85%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Apr</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-3">
+<div class="w-full bg-primary-dim rounded-t-lg h-[100%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">May</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-3">
+<div class="w-full bg-primary rounded-t-lg h-[75%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Jun</span>
+</div>
+</div>
+</div>
+<!-- Gamification Elements -->
+<div class="bg-surface-container-lowest p-8 rounded-[1.5rem] shadow-[0_12px_32px_rgba(45,47,47,0.04)] flex flex-col items-center text-center">
+<div class="relative mb-6">
+<div class="w-32 h-32 rounded-full border-4 border-tertiary-fixed flex items-center justify-center bg-tertiary-container shadow-[0_0_40px_rgba(254,195,48,0.3)]">
+<span class="material-symbols-outlined text-5xl text-on-tertiary-container" data-icon="military_tech" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+<div class="absolute -right-2 top-0 bg-white shadow-md rounded-full px-3 py-1 text-[10px] font-bold text-tertiary-dim border border-tertiary-fixed">
+                        GOLD TIER
+                    </div>
+</div>
+<h3 class="font-headline text-xl font-bold mb-2">Gold Partner Status</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">You've unlocked the highest tier of community contribution. Exclusive dashboard insights now available.</p>
+<div class="grid grid-cols-2 gap-3 w-full">
+<div class="bg-surface-container-low p-3 rounded-2xl grayscale flex flex-col items-center opacity-40">
+<span class="material-symbols-outlined text-zinc-400" data-icon="workspace_premium">workspace_premium</span>
+<span class="text-[10px] font-bold mt-1">BRONZE</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-2xl grayscale flex flex-col items-center opacity-40">
+<span class="material-symbols-outlined text-zinc-400" data-icon="workspace_premium">workspace_premium</span>
+<span class="text-[10px] font-bold mt-1">SILVER</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Community Leaderboard -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Top Volunteers -->
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-headline text-2xl font-bold tracking-tight">Top Volunteers</h3>
+<button class="text-primary text-sm font-bold flex items-center gap-1 group">
+                        View all <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest rounded-[1.5rem] overflow-hidden shadow-[0_12px_32px_rgba(45,47,47,0.04)]">
+<!-- Leaderboard Item -->
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<span class="font-headline text-lg font-bold text-outline-variant w-6 text-center">1</span>
+<div class="w-12 h-12 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="close up of woman with curly hair smiling outdoors at dawn" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqfSvoDbtDEdTTSmw904AmscCxnmr2BkRd9d1p0a_gkb_F5mHTlSHUOcogNh3h2AkQWtwkKSK4skXg7B4sNIzNuNHWypwmw1Kwaoa_I61rF9QXfkKoi3lLF62pWTUoSj7_l1AxxAk3qvD4DBYKD98Ekr5tcEN6U7oqdTUMeXapVLzb9_buR4vhPBBI_y0V0lskijXNzMxzv_srK1OxkHeVV1Su1LfYGzCZjzQ7It6hgBPFMgILuhE1O8T3Cb6eajfvkyFJBm1vyfKV"/>
+</div>
+<div>
+<p class="font-bold text-on-surface">Sarah J.</p>
+<p class="text-xs text-on-surface-variant">142 Deliveries</p>
+</div>
+</div>
+<div class="bg-primary-container/30 px-3 py-1 rounded-full text-[10px] font-extrabold text-on-primary-container">
+                            +12.4 CO2 SAVED
+                        </div>
+</div>
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors border-t border-surface-container-low">
+<div class="flex items-center gap-4">
+<span class="font-headline text-lg font-bold text-outline-variant w-6 text-center">2</span>
+<div class="w-12 h-12 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="portrait of smiling man in casual wear in bright outdoor natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlRFjJXiEGH5xpnBgknYYC3BlTRfd2PfItuu-4qM6J0OHnK8XiSK_8SkUWswCwVwPKZxd749gEXcrmiPrxaVTd342XDMrnSXg8glUS4PzjPBVTLTCK6GbrpwiEEu_7kenpqVbriqLMNGevoq1UYUOZ2ipd3TBEUS0tU9jleMgq7oDV9_Mdvyg54MQOskJZ8b17tJrNABlAhSADYtL0lyqdx4XJuALHTunep-ZQvqDxOL-BdkIrEmtKPaqrZXvH0BlHLytvSsil97us"/>
+</div>
+<div>
+<p class="font-bold text-on-surface">Michael K.</p>
+<p class="text-xs text-on-surface-variant">128 Deliveries</p>
+</div>
+</div>
+<div class="bg-primary-container/30 px-3 py-1 rounded-full text-[10px] font-extrabold text-on-primary-container">
+                            +10.1 CO2 SAVED
+                        </div>
+</div>
+</div>
+</div>
+<!-- Top Restaurant Partners -->
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-headline text-2xl font-bold tracking-tight">Top Partners</h3>
+<button class="text-primary text-sm font-bold flex items-center gap-1 group">
+                        View all <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest rounded-[1.5rem] overflow-hidden shadow-[0_12px_32px_rgba(45,47,47,0.04)]">
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<span class="font-headline text-lg font-bold text-outline-variant w-6 text-center">1</span>
+<div class="w-12 h-12 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="interior view of a modern bright bistro with wooden tables and plants" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKZrI5ZY2h5g2gNJMRtp1C7sWUv6at4gLzY02rcpYqdYBjvvRBDxiihmh-5C77911sAIVKwl3-NiBd3NmhvY6NxLWlVkp68snkjuAPSY-qYARhgAuH-pniyIWUZECVbpmW16xFGMKvpGjOht5Tt4bxor5PapCi5jWOCqArks2yObVc8E_9-CYThbspxaClEC1TQFcIQlalSyblD55LjiKaQNo-v2o3xFM4ka_C8kmtR0T6lijQXI_N210V0Dp2jRVcEcHykH6skWIA"/>
+</div>
+<div>
+<p class="font-bold text-on-surface">Green Bistro</p>
+<p class="text-xs text-on-surface-variant">2,450 Meals Shared</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.9</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors border-t border-surface-container-low">
+<div class="flex items-center gap-4">
+<span class="font-headline text-lg font-bold text-outline-variant w-6 text-center">2</span>
+<div class="w-12 h-12 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="upscale restaurant dining room with elegant decor and warm atmospheric lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA795T5XX6JzUhzin9Y7bLLK8BDSuqnFjqMN5UHLmoFSSfglO84D5jMzYqy6EuElYyimqgy-w5FwSeaWVoioLYHn6lWrquDj_27Uj-qp9iKUATEmDCazfIpNaFRtexPuRqrFE9DKAChHmdVKDRAJZWf-P4yo1ETJFcm1LG4rf_f8GDVp89bXGFuPQyF7E46DWfGFoa-0QA5gIiIG3FFxDdIWx_LFuOHCiDeuRgRjIFzRw-pdi32ipcxW2k9OkmAg_gm0js11lgjTyA1"/>
+</div>
+<div>
+<p class="font-bold text-on-surface">Harbor Cafe</p>
+<p class="text-xs text-on-surface-variant">1,820 Meals Shared</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.7</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- NavigationDrawer (Mobile Focus Overlay Example) - hidden by default -->
+<aside class="fixed inset-y-0 left-0 w-80 z-[60] flex flex-col pt-8 pb-4 bg-[#f6f6f6] dark:bg-zinc-950 rounded-r-[1.5rem] shadow-2xl -translate-x-full transition-transform duration-300 ease-in-out">
+<div class="px-6 mb-10">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFZouaS-T3mnPrP2Q44PA29-8YScZx-6GGd7D2HxWYCCcfRipeVf_xnpxMVgPqV-gVzhK1cR0DeOI42Lrj6rwEcpC52Qur70WbzkhEDqW0-MwKhylymYPbt2leNS11dIksVCyUbelZgYxg7YtbXlggEAj5DlQkQm9M1kZC0EOZWZah9sEavMteDzzHZ7w6gmG43Ywt6QxiB4N0U3rVrrqN1RTmcvp5yruYNN1Ig9ivEarXf5kl2M-bz6HqIEswbMpnisB6Oaal755O"/>
+</div>
+<div>
+<h4 class="font-['Plus_Jakarta_Sans'] font-bold text-zinc-900 dark:text-zinc-100">Green Bistro</h4>
+<p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Premium Tier</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-2 px-4">
+<a class="flex items-center gap-4 px-4 py-3 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200/50 rounded-xl transition-transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="swap_horiz">swap_horiz</span>
+<span class="font-medium">Switch to NGO</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200/50 rounded-xl transition-transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="volunteer_activism">volunteer_activism</span>
+<span class="font-medium">Switch to Volunteer</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200/50 rounded-xl transition-transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-medium">My Postings</span>
+</a>
+<div class="pt-4 mt-4 border-t border-zinc-200 dark:border-zinc-800">
+<a class="flex items-center gap-4 px-4 py-3 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200/50 rounded-xl transition-transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200/50 rounded-xl transition-transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-medium">Help Support</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 flex justify-around items-center px-4 pb-6 pt-3 bg-white dark:bg-zinc-900 rounded-t-[1.5rem] z-50 shadow-[0_-4px_24px_rgba(0,0,0,0.04)] border-t border-zinc-100 dark:border-zinc-800">
+<a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-2 hover:text-green-700 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-2 hover:text-green-700 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Deliveries</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-green-100 dark:bg-green-900/40 text-green-900 dark:text-green-100 rounded-[1.25rem] px-5 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Impact</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-2 hover:text-green-700 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Profile</span>
+</a>
+</nav>
+<!-- Floating Action Button (FAB) - Contextual for primary dashboard -->
+<button class="fixed right-6 bottom-24 md:bottom-8 bg-gradient-to-br from-primary to-primary-dim text-white w-14 h-14 rounded-2xl shadow-xl flex items-center justify-center active:scale-95 transition-transform z-40 group">
+<span class="material-symbols-outlined text-2xl group-hover:rotate-90 transition-transform duration-300" data-icon="add">add</span>
+</button>
+</body></html>

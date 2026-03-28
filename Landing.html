@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#5a5c5c",
+              "secondary-fixed-dim": "#c1d8e4",
+              "primary-fixed": "#b2faa9",
+              "on-secondary-fixed-variant": "#495f69",
+              "secondary-container": "#cfe6f2",
+              "tertiary-fixed": "#fec330",
+              "outline-variant": "#acadad",
+              "on-primary": "#d1ffc8",
+              "secondary-fixed": "#cfe6f2",
+              "error-container": "#f95630",
+              "on-tertiary": "#fff1db",
+              "on-secondary-fixed": "#2d424c",
+              "on-tertiary-fixed-variant": "#634900",
+              "secondary-dim": "#3e535c",
+              "tertiary": "#765600",
+              "surface-dim": "#d3d5d5",
+              "on-primary-container": "#1f6223",
+              "background": "#f6f6f6",
+              "surface-container": "#e7e8e8",
+              "surface": "#f6f6f6",
+              "surface-tint": "#266829",
+              "tertiary-container": "#fec330",
+              "inverse-on-surface": "#9c9d9d",
+              "surface-bright": "#f6f6f6",
+              "tertiary-fixed-dim": "#efb520",
+              "primary-dim": "#185c1e",
+              "surface-container-low": "#f0f1f1",
+              "outline": "#767777",
+              "primary-container": "#b2faa9",
+              "primary-fixed-dim": "#a4eb9c",
+              "tertiary-dim": "#674b00",
+              "surface-container-high": "#e1e3e3",
+              "on-tertiary-container": "#584000",
+              "primary": "#266829",
+              "error-dim": "#b92902",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#2d2f2f",
+              "on-error-container": "#520c00",
+              "on-secondary": "#e4f5ff",
+              "error": "#b02500",
+              "on-error": "#ffefec",
+              "secondary": "#495f69",
+              "inverse-primary": "#b2faa9",
+              "on-primary-fixed-variant": "#2a6c2c",
+              "on-background": "#2d2f2f",
+              "on-tertiary-fixed": "#402d00",
+              "on-secondary-container": "#40555f",
+              "surface-container-highest": "#dbdddd",
+              "on-primary-fixed": "#054e12",
+              "inverse-surface": "#0c0f0f",
+              "surface-variant": "#dbdddd"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      .primary-gradient {
+        background: linear-gradient(135deg, #266829 0%, #185c1e 100%);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopAppBar Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl shadow-[0_12px_32px_rgba(45,47,47,0.06)]">
+<div class="flex justify-between items-center px-6 py-4 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-green-800 dark:text-green-400" data-icon="menu">menu</span>
+<span class="text-2xl font-extrabold text-green-900 dark:text-green-50 tracking-tight font-headline">FoodBridge</span>
+</div>
+<div class="hidden md:flex gap-8 items-center font-headline font-bold tracking-tight">
+<a class="text-green-900 dark:text-green-200" href="#">Home</a>
+<a class="text-zinc-500 dark:text-zinc-400 hover:bg-green-50 dark:hover:bg-green-900/20 px-3 py-2 rounded-lg transition-colors" href="#">About</a>
+<a class="text-zinc-500 dark:text-zinc-400 hover:bg-green-50 dark:hover:bg-green-900/20 px-3 py-2 rounded-lg transition-colors" href="#">Impact</a>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden">
+<img alt="User profile" data-alt="Close up portrait of a smiling person in warm natural sunlight with a soft blurred garden background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQZFCEskgNPLY8QUzmvNoY1H7i-jCNlYTooz-_GOC3fhPquFsVbrIrDoMjV3MppbRECkSDn3LKro-HAdOevJAdY435Jsdc2ReEXi6NURTXE7eEQkB1lsX8gjg6_WwutzKu2TB8QCkLv8PAwAYDv6RIHmv3GcZSMoFJ_bm3i7LaSh2a9xJkz-N_kRfqwqXr8ZazqriHgOjERuUTWHqhoyQkt7RpBZv5FtGCLnnhN3k0S3hSwKsb_8FY4vJiaZMe92SguMsNZ3hZlHt7"/>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-32 px-6 max-w-screen-xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-16 md:mb-24 flex flex-col md:flex-row items-center gap-12">
+<div class="w-full md:w-1/2 order-2 md:order-1">
+<div class="inline-flex items-center px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold uppercase tracking-widest mb-6">
+                    Join the movement
+                </div>
+<h1 class="text-5xl md:text-7xl font-headline font-extrabold text-on-surface leading-[1.1] tracking-tighter mb-6">
+                    End Food Waste, <span class="text-primary italic">Together.</span>
+</h1>
+<p class="text-lg text-on-surface-variant max-w-md leading-relaxed mb-8">
+                    Bridging the gap between surplus high-quality food and those who need it most. Connect, donate, and track your environmental impact.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="primary-gradient text-white px-8 py-4 rounded-xl font-headline font-bold text-lg shadow-[0_12px_32px_rgba(38,104,41,0.2)] active:scale-95 transition-transform duration-200">
+                        Get Started
+                    </button>
+<button class="bg-surface-container-lowest text-on-surface px-8 py-4 rounded-xl font-headline font-bold text-lg hover:bg-surface-container transition-colors">
+                        Learn More
+                    </button>
+</div>
+</div>
+<!-- Asymmetric Bento-style Image Grid -->
+<div class="w-full md:w-1/2 order-1 md:order-2 grid grid-cols-6 grid-rows-6 gap-4 h-[400px] md:h-[600px]">
+<div class="col-span-4 row-span-4 rounded-[2rem] overflow-hidden shadow-xl">
+<img class="w-full h-full object-cover" data-alt="Vibrant close-up of fresh organic vegetables in a rustic wooden crate at a high-end farmers market with bright natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBstpYVhaCX6nInV6egXdUt-HKWJsvZzY-h5aPqTEtJ8DHfb5KRhcoVk31L6SwGep8PhSK7wi2yjHj7T3LQk_liZLgD6KY7S-6PruG3tMWgBGTqMIjZpU-WHCYbP2uzw8JhshWyIgGyC2Q1EOPj1JRLVezh1qXtczlBnOdjpDbbp0Sl6-FMD3yIlXxWVUKeiJZBH9tbPWS0RqLuk8o21-Z1GZqFIa_9QXcj-DoDhJB05ujGyKeUJkU0qzE_sR2vY7Ib3xWJc6Wu9kma"/>
+</div>
+<div class="col-span-2 row-span-3 rounded-[2rem] overflow-hidden shadow-xl">
+<img class="w-full h-full object-cover" data-alt="Volunteer hands placing fresh bread into a clean delivery bag in a bright community center setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-l89BIqvUt-sFhWNJaAdWfNdbp9ZaMkQrkmS1BzvGZ7Zm-Q9Ehs-SbJ8uSY0018LxDxtIBOBMcFvvoRZ0y7ZgyP9_SiNxBF9jGr0fn045dTJNiGtczVhPYQ-flGdWv5XdJpjYDvB-e-DmssS-Ex-z0jEvoPiV59i3IsG40F_HRFHWjUsca182D09sGXAzabvUCDyGwQqTRqGboVDastvD73p3uZhrsudTX9_FiSmxCeqU4PfMhrJhdBh8pAYyNUT5pULO6mXHbjjy"/>
+</div>
+<div class="col-span-3 row-span-3 rounded-[2rem] overflow-hidden shadow-xl">
+<img class="w-full h-full object-cover" data-alt="Sustainable eco-friendly food packaging on a clean white surface with minimal shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWXmfgMEC1WGL9Moyj7uhE5MfKFAVHesWXZ65ogixGlIvigKLzBSXbylhFWoH3apG2TCWJ2ndyy_Ll8LmgADI1stWSgLja4pdQx5O4uX4qBWD8L8V7n5NyzOPjTmGVvohmOvlFhPPM1EUhKQM-ksfPaNtz5s4MovxwX4ZBJ-Vj1ZAq1PDjcYh_n-MVs96eDlAEuJUZIaFHfSqJTSXBpBcvhnrBIsoaJ6QTnFtANVBGmAXnIR4flpCT5B4YyxoGR6-Zn3ttSiN5rFFR"/>
+</div>
+<div class="col-span-3 row-span-2 bg-primary-container rounded-[2rem] p-6 flex items-center justify-center shadow-inner">
+<div class="text-center">
+<span class="text-3xl font-extrabold text-on-primary-container block">1.2M</span>
+<span class="text-sm font-label uppercase tracking-widest text-on-primary-fixed-variant">Meals Saved</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Role Selection Canvas -->
+<section class="mb-24">
+<div class="flex flex-col items-start mb-12">
+<h2 class="text-3xl md:text-4xl font-headline font-bold text-on-surface mb-4">Choose Your Path</h2>
+<div class="h-1 w-24 bg-primary rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Restaurant Partner Card -->
+<div class="group bg-surface-container-lowest rounded-[2rem] p-8 shadow-[0_12px_32px_rgba(45,47,47,0.06)] hover:translate-y-[-8px] transition-all duration-300">
+<div class="w-16 h-16 rounded-2xl bg-primary-container flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-on-primary-container text-3xl" data-icon="restaurant">restaurant</span>
+</div>
+<h3 class="text-2xl font-headline font-bold text-on-surface mb-4">Restaurant Partner</h3>
+<p class="text-on-surface-variant leading-relaxed mb-8">
+                        Reduce your footprint and tax liability by donating surplus prepared meals. We handle the logistics and documentation.
+                    </p>
+<ul class="space-y-3 mb-8 text-sm font-medium">
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                            Automated donation logs
+                        </li>
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                            Impact reports for customers
+                        </li>
+</ul>
+<button class="w-full py-4 rounded-xl bg-surface-container-highest text-on-primary-container font-headline font-bold hover:bg-primary-container transition-colors">
+                        Register Venue
+                    </button>
+</div>
+<!-- NGO/Community Card -->
+<div class="group bg-surface-container-lowest rounded-[2rem] p-8 shadow-[0_12px_32px_rgba(45,47,47,0.06)] hover:translate-y-[-8px] transition-all duration-300 ring-2 ring-primary">
+<div class="w-16 h-16 rounded-2xl bg-secondary-container flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-on-secondary-container text-3xl" data-icon="handshake">handshake</span>
+</div>
+<h3 class="text-2xl font-headline font-bold text-on-surface mb-4">NGO / Community</h3>
+<p class="text-on-surface-variant leading-relaxed mb-8">
+                        Access high-quality food for your constituents. Get real-time alerts when fresh inventory is ready for pickup nearby.
+                    </p>
+<ul class="space-y-3 mb-8 text-sm font-medium">
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                            Real-time inventory map
+                        </li>
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                            Direct pickup scheduling
+                        </li>
+</ul>
+<button class="w-full py-4 rounded-xl primary-gradient text-white font-headline font-bold shadow-lg shadow-primary/20">
+                        Join Network
+                    </button>
+</div>
+<!-- Volunteer Card -->
+<div class="group bg-surface-container-lowest rounded-[2rem] p-8 shadow-[0_12px_32px_rgba(45,47,47,0.06)] hover:translate-y-[-8px] transition-all duration-300">
+<div class="w-16 h-16 rounded-2xl bg-tertiary-container flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-on-tertiary-container text-3xl" data-icon="volunteer_activism">volunteer_activism</span>
+</div>
+<h3 class="text-2xl font-headline font-bold text-on-surface mb-4">Volunteer</h3>
+<p class="text-on-surface-variant leading-relaxed mb-8">
+                        The vital link. Transport food from donors to recipients in your neighborhood. Choose deliveries that fit your schedule.
+                    </p>
+<ul class="space-y-3 mb-8 text-sm font-medium">
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                            Flexible delivery slots
+                        </li>
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                            Track personal CO2 impact
+                        </li>
+</ul>
+<button class="w-full py-4 rounded-xl bg-surface-container-highest text-on-primary-container font-headline font-bold hover:bg-primary-container transition-colors">
+                        Start Delivering
+                    </button>
+</div>
+</div>
+</section>
+<!-- Impact Section (The Ledger) -->
+<section class="bg-surface-container rounded-[3rem] p-8 md:p-16 relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-3xl md:text-5xl font-headline font-extrabold text-on-surface mb-12">The Impact Ledger</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="p-6 bg-surface-container-lowest rounded-2xl border-l-4 border-primary">
+<p class="text-sm font-label uppercase tracking-widest text-on-surface-variant mb-2">Total Diverted</p>
+<p class="text-4xl font-extrabold text-primary">45,200kg</p>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-2xl border-l-4 border-secondary">
+<p class="text-sm font-label uppercase tracking-widest text-on-surface-variant mb-2">Active Partners</p>
+<p class="text-4xl font-extrabold text-secondary">890+</p>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-2xl border-l-4 border-tertiary">
+<p class="text-sm font-label uppercase tracking-widest text-on-surface-variant mb-2">CO2 Emissions Saved</p>
+<p class="text-4xl font-extrabold text-tertiary">112 Tons</p>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-2xl border-l-4 border-error">
+<p class="text-sm font-label uppercase tracking-widest text-on-surface-variant mb-2">Meals Served</p>
+<p class="text-4xl font-extrabold text-error">1.2M</p>
+</div>
+</div>
+</div>
+<!-- Decorative Background Element -->
+<div class="absolute -bottom-20 -right-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
+</section>
+</main>
+<!-- BottomNavBar for Mobile -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-zinc-900 shadow-[0_-4px_24px_rgba(0,0,0,0.04)] rounded-t-[1.5rem] border-t border-zinc-100 dark:border-zinc-800">
+<div class="flex justify-around items-center px-4 pb-6 pt-3">
+<div class="flex flex-col items-center justify-center bg-green-100 dark:bg-green-900/40 text-green-900 dark:text-green-100 rounded-[1.25rem] px-5 py-2">
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-2 hover:text-green-700 dark:hover:text-green-300">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Deliveries</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-2 hover:text-green-700 dark:hover:text-green-300">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Impact</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-2 hover:text-green-700 dark:hover:text-green-300">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Profile</span>
+</div>
+</div>
+</div>
+</body></html>
